@@ -30,3 +30,6 @@
 
  <p>첫째 줄에 최소 비교 횟수를 출력한다.</p>
 
+### 메모
+1. 우선순위큐의 오름차순을 헷갈리지 말자
+2. 우선순위큐를 오름차순으로 하려면 priority queue<int, vector<int>, greater<int>> arr;
