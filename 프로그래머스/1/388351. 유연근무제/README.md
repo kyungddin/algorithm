@@ -1,4 +1,5 @@
 # [level 1] 유연근무제 - 388351 
+# Greedy, Prefix_Sum
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/388351) 
 
