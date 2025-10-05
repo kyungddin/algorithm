@@ -1,4 +1,5 @@
 # [level 1] [PCCP 기출문제] 1번 / 동영상 재생기 - 340213 
+# Simulation, String
 
 [문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/340213) 
 
