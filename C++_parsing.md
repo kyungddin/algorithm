@@ -20,3 +20,22 @@ int main()
 
     return 0;
 }
+
+#include <iostream>
+#include <string>
+#include <typeinfo>
+#include <sstream>
+
+using namespace std;
+
+int main()
+{
+    string s = "My,Age,is,25";
+    stringstream ss(s);
+
+    string token;
+    while (getline(ss, token, ','))
+    {
+        cout << token << "\n";
+    }
+}
