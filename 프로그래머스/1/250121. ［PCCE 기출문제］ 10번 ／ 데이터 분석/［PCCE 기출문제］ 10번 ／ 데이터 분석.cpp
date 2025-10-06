@@ -8,7 +8,9 @@ int col;
 
 bool compare(const vector<int>& a, const vector<int>& b){
     return a[col] < b[col];
-}
+} 
+// 이런식으로 compare 함수를 써서 특정 col을 기준으로 정렬!
+// const vector<int>& 인자 자료형에 유의!
 
 vector<vector<int>> solution(vector<vector<int>> data, string ext, int val_ext, string sort_by) {
     
@@ -54,7 +56,7 @@ vector<vector<int>> solution(vector<vector<int>> data, string ext, int val_ext, 
             if(data[i][ext_label] < val_ext) continue;
             else filter.push_back(i);
         }
-    }
+    } // date 형식의 문자열의 경우 그대로 비교해도 대수비교가 가능하다..!
     else{
         for(i=0; i<data.size(); i++){
             if(data[i][ext_label] < val_ext) continue;
@@ -83,6 +85,7 @@ vector<vector<int>> solution(vector<vector<int>> data, string ext, int val_ext, 
     // Sort
     
     sort(answer.begin(), answer.end(), compare);
+    // sort안에 compare 넣을 때 함수 포인터를 넣어야 하므로 ()는 ㄴㄴ해
     
     return answer;
 }
