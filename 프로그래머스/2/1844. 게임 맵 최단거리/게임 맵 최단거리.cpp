@@ -16,7 +16,10 @@ void BFS(vector<vector<int>>& maps){
     q.push({0, 0, 1});
     
     while(!q.empty()){
-        auto [ny, nx, c] = q.front();
+        tuple<int, int, int> tmp = q.front(); // vector보다 tuple이 시간이 빠르다!
+        int ny = get<0>(tmp); // tuple의 각 요소에 접근할 때는 다음과 같이 get<>()을 사용!
+        int nx = get<1>(tmp);
+        int c = get<2>(tmp);
         q.pop();
 
         for(int i=0; i<4; i++){
@@ -49,7 +52,7 @@ int solution(vector<vector<int>> maps)
     // Main Logic
     gy = row - 1;
     gx = col - 1;
-    visit.assign(row, vector<int>(col, 0));
+    visit.assign(row, vector<int>(col, 0)); // 여러 test_case에 대해서 시간초과가 안 나려면 resize 대신 assign으로 초기화를 거쳐야 함!
     
     BFS(maps);
     
