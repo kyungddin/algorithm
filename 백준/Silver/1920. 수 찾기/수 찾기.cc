@@ -1,54 +1,67 @@
-#include <stdio.h>
+#include <iostream>
 #include <algorithm>
+#include <vector>
+#include <set>
 
 using namespace std;
 
-int v1[1000000];
-int v2[1000000];
+vector<int> list;
 
-bool search(int arr[], int low, int high, int n)
-{
-	int mid;
-
-	while (low<=high) {
-		mid = (low + high) / 2;
-
-		if (arr[mid] == n) return 1;
-
-		else if (arr[mid] < n) {
-			low = mid + 1;
-		}
-		else if (arr[mid] > n) {
-			high = mid - 1;
-		}
-	}
-
-	return 0;
-}
+bool binary_search(int num);
 
 int main()
 {
-	int i, n, m;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
 
-	scanf("%d", &n);
+    int n;
+    cin >> n;
 
-	for (i = 0; i < n; i++) {
-		scanf("%d", &v1[i]);
-	}
+    int tmp;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> tmp;
+        list.push_back(tmp);
+    }
 
-	sort(v1, v1+n);
+    sort(list.begin(), list.end());
 
+    int m;
+    cin >> m;
 
-	scanf("%d", &m);
+    for (int i = 0; i < m; i++)
+    {
+        cin >> tmp;
+        cout << binary_search(tmp) << "\n";
+    }
 
-	for (i = 0; i < m; i++)
-	{
-		scanf("%d", &v2[i]);
-	}
-
-	for (i = 0; i < m; i++)
-	{
-		printf("%d\n", search(v1, 0, n-1, v2[i]));
-	}
-
+    return 0;
 }
+
+bool binary_search(int num)
+{
+    int start = 0;
+    int end = list.size() - 1;
+    int mid = (start + end) / 2;
+
+    while (start <= end)
+    {
+        if (num == list[mid]) return true;
+        else if (num > list[mid])
+        {
+            start = mid+1;
+            mid = (start + end) / 2;
+        }
+        else if (num < list[mid])
+        {
+            end = mid-1;
+            mid = (start + end) / 2;
+        }
+    }
+
+    return false;
+}
+
+// 0 1 2 3 4 5
+// 1 2 3 4 5
