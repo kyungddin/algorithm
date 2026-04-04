@@ -1,67 +1,35 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <set>
 
 using namespace std;
 
-vector<int> list;
-
-bool binary_search(int num);
-
 int main()
 {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
 
-    int n;
-    cin >> n;
+	int n;
+	cin >> n;
 
-    int tmp;
-    for (int i = 0; i < n; i++)
-    {
-        cin >> tmp;
-        list.push_back(tmp);
-    }
+	vector<int> v;
 
-    sort(list.begin(), list.end());
+	int tmp;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> tmp;
+		v.push_back(tmp);
+	}
 
-    int m;
-    cin >> m;
+	sort(v.begin(), v.end());
 
-    for (int i = 0; i < m; i++)
-    {
-        cin >> tmp;
-        cout << binary_search(tmp) << "\n";
-    }
+	int m;
+	cin >> m;
 
-    return 0;
+	for (int i = 0; i < m; i++)
+	{
+		cin >> tmp;
+		cout << binary_search(v.begin(), v.end(), tmp) << "\n";
+	}
 }
-
-bool binary_search(int num)
-{
-    int start = 0;
-    int end = list.size() - 1;
-    int mid = (start + end) / 2;
-
-    while (start <= end)
-    {
-        if (num == list[mid]) return true;
-        else if (num > list[mid])
-        {
-            start = mid+1;
-            mid = (start + end) / 2;
-        }
-        else if (num < list[mid])
-        {
-            end = mid-1;
-            mid = (start + end) / 2;
-        }
-    }
-
-    return false;
-}
-
-// 0 1 2 3 4 5
-// 1 2 3 4 5
