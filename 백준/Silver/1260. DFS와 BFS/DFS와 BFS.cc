@@ -1,69 +1,79 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
-#include <deque>
+#include <queue>
+#include <algorithm>
 
 using namespace std;
 
-void DFS(int num);
-void BFS(int num);
+vector<int> visited;
+vector<vector<int>> graph;
 
-vector<int> map[1001];
-vector<bool> visit1(1001, 0);
-vector<bool> visit2(1001, 0);
-deque<int> q;
+void DFS(int s);
+void BFS(int s);
 
 int main()
 {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	cout.tie(0);
 
-	int i;
-	int n, m, v;
-	cin >> n >> m >> v;
-	
-	int a, b;
-	for (i = 0; i < m; i++) {
-		cin >> a >> b;
-		map[a].push_back(b);
-		map[b].push_back(a);
-	} // 인접 리스트 완성
+	int N, M, V;
+	cin >> N >> M >> V;
+	graph.resize(N+1); // THIS!
+	visited = vector<int>(N + 1, 0); // THIS!
 
-	for (i = 1; i <= n; i++) {
-		sort(map[i].begin(), map[i].end());
+	int A, B;
+	for (int i = 1; i <= M; i++)
+	{
+		cin >> A >> B;
+		graph[A].push_back(B);
+		graph[B].push_back(A);
 	}
 
-	DFS(v);
+	for (int i = 1; i <= N; i++)
+	{
+		sort(graph[i].begin(), graph[i].end());
+	}
+
+	DFS(V);
 	cout << "\n";
-	BFS(v);
+
+	fill(visited.begin(), visited.end(), 0); // THIS!
+
+	BFS(V);
 }
 
-void DFS(int num) {
-	visit1[num] = true;
-	cout << num << " ";
-	for (int j = 0; j < map[num].size(); j++) {
-		if (visit1[map[num][j]] == false) {
-			DFS(map[num][j]);
-		}
+void DFS(int s)
+{
+	visited[s] = 1;
+	cout << s << " ";
+
+	for (int v : graph[s])
+	{
+		if (visited[v] == 0)
+			DFS(v);
 	}
 }
 
-void BFS(int num) {
-	int p;
-	visit2[num] = true;
-	cout << num << " ";
-	for (int k = 0; k < map[num].size(); k++) {
-		q.push_back(map[num][k]);
-	}
-	while (q.size() != 0) {
-		p = q[0];
-		q.pop_front();
-		if (visit2[p] == false) {
-			visit2[p] = true;
-			cout << p << " ";
-			for (int k = 0; k < map[p].size(); k++) {
-				q.push_back(map[p][k]);
+void BFS(int s)
+{
+	visited[s] = 1;
+
+	queue<int> q;
+	q.push(s);
+	
+	while (!q.empty())
+	{
+		int current = q.front();
+		q.pop();
+		cout << current << " ";
+
+		for (int v : graph[current])
+		{
+			if (visited[v] == 0)
+			{
+				visited[v] = 1;
+				q.push(v);
 			}
 		}
 	}
